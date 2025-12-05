@@ -9,7 +9,12 @@ import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
-import { FiUpload as Upload, FiFileText as FileText } from 'react-icons/fi'
+import { 
+  FiUpload as Upload, 
+  FiFileText as FileText,
+  FiCheckCircle as CheckCircle,
+  FiAlertCircle as AlertCircle
+} from 'react-icons/fi'
 
 interface PDFUploadModalProps {
   isOpen: boolean
