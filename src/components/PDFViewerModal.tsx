@@ -19,7 +19,7 @@ import {
   FiZoomOut as ZoomOut,
   FiRotateCw as RotateCw,
   FiMove as Hand,
-  FiCursor as MousePointer,
+  FiTarget as MousePointer,
 } from 'react-icons/fi'
 
 interface PDFNote {
