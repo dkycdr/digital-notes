@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
-import { readFile } from 'fs/promises'
-import { join } from 'path'
 
 export async function GET(
   request: NextRequest,
@@ -19,27 +17,20 @@ export async function GET(
       )
     }
 
-    // Read the PDF file
-    const filePath = join(process.cwd(), 'uploads', note.filePath.split('/').pop() || '')
-    
-    try {
-      const fileBuffer = await readFile(filePath)
-      
-      // Return the PDF file for inline viewing
-      return new NextResponse(fileBuffer, {
-        headers: {
-          'Content-Type': 'application/pdf',
-          'Content-Disposition': `inline; filename="${note.fileName}"`,
-          'Content-Length': fileBuffer.length.toString(),
-        },
-      })
-    } catch (fileError) {
-      console.error('File read error:', fileError)
+    if (!note.fileData) {
       return NextResponse.json(
-        { error: 'PDF file not found on server' },
+        { error: 'PDF file not found' },
         { status: 404 }
       )
     }
+    
+    return new NextResponse(note.fileData, {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `inline; filename="${note.fileName}"`,
+        'Content-Length': note.fileData.length.toString(),
+      },
+    })
 
   } catch (error) {
     console.error('View PDF error:', error)

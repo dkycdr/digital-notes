@@ -22,7 +22,7 @@ model Note {
   subject     String
   category    String
   fileName    String
-  filePath    String
+  fileData    Bytes    // Store PDF binary data in PostgreSQL
   fileSize    Int
   uploadedAt  DateTime @default(now())
   updatedAt   DateTime @updatedAt

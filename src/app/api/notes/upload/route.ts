@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
-import { writeFile, mkdir } from 'fs/promises'
-import { join } from 'path'
 
 export async function POST(request: NextRequest) {
   try {
@@ -45,26 +43,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), 'uploads')
-    try {
-      await mkdir(uploadsDir, { recursive: true })
-    } catch (error) {
-      // Directory already exists
-    }
-
-    // Generate unique filename
-    const timestamp = Date.now()
-    const randomString = Math.random().toString(36).substring(2, 8)
-    const fileName = `${timestamp}_${randomString}_${file.name}`
-    const filePath = join(uploadsDir, fileName)
-
-    // Save file to disk
+    // Convert file to buffer and save to database
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
-    await writeFile(filePath, buffer)
 
-    // Save to database
+    // Save to database with file data
     const note = await db.note.create({
       data: {
         title,
@@ -72,7 +55,7 @@ export async function POST(request: NextRequest) {
         subject,
         category,
         fileName: file.name,
-        filePath: fileName, // Store only the filename, not full path
+        fileData: buffer, // Store PDF binary data directly in PostgreSQL
         fileSize: file.size,
       },
     })
