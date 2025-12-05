@@ -18,7 +18,7 @@ import {
   FiZoomIn as ZoomIn,
   FiZoomOut as ZoomOut,
   FiRotateCw as RotateCw,
-  FiHand as Hand,
+  FiArrowMove as Hand,
   FiMove as MousePointer,
 } from 'react-icons/fi'
 
