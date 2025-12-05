@@ -21,12 +21,12 @@ export const metadata: Metadata = {
   keywords: ["Digital Notes", "PDF", "Lecture Notes", "Education", "Students", "Study", "Personal"],
   authors: [{ name: "Author" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/Untitled.png",
   },
   openGraph: {
     title: "Dwiky's Digital Notes - Personal PDF Manager",
     description: "Upload, view, and manage your PDF lecture notes in one place - your personal collection",
-    url: "https://chat.z.ai",
+    url: "",
     siteName: "Dwiky's Digital Notes",
     type: "website",
   },
